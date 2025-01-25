@@ -1,0 +1,52 @@
+@import "../../../assets/styles/variables.scss";
+
+.dn {
+  position: relative;
+  &__title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    span {
+      //styleName: H5;
+      font-family: Plus Jakarta Sans;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: 0.01em;
+      text-align: left;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+    }
+    cursor: pointer;
+
+    img {
+      transition: 0.3s;
+    }
+  }
+  &__content {
+    display: none;
+    position: absolute;
+    top: 150%;
+    padding: 12px 8px;
+    background-color: $secondary-color;
+    border-radius: 12px;
+
+    flex-direction: column;
+    gap: 12px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      padding: 8px;
+      cursor: pointer;
+      font-size: $font-size-lg;
+      white-space: nowrap;
+      color: $tertiary-color;
+    }
+  }
+  &__content__open {
+    display: flex;
+  }
+}
