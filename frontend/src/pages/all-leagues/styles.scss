@@ -1,0 +1,52 @@
+.join-the-league {
+  .container {
+    .title {
+    }
+
+    .slides {
+      margin: 0;
+      flex-wrap: wrap;
+      overflow: auto;
+      &.all-leagues {
+        .slide {
+          min-height: 300px;
+          .slide-body {
+            .label {
+            }
+
+            img {
+            }
+
+            h4 {
+            }
+
+            p {
+            }
+
+            ul {
+              li {
+                .check {
+                  img {
+                  }
+                }
+
+                p {
+                }
+              }
+            }
+
+            .btn {
+            }
+          }
+        }
+      }
+    }
+
+    .slider-control {
+      .slider-control__container {
+        .control__button {
+        }
+      }
+    }
+  }
+}

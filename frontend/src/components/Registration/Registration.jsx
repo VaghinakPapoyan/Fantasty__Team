@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RegistrationForm from "./RegistrationForm.jsx";
 import Verification from "../Verification/Verification.jsx";
 import "./styles.scss";
@@ -7,21 +7,19 @@ export default function Registration({
   closeRegistrationModal,
   openLoginModal,
   closeAllModals,
+  setShowVerification,
+  showVerification,
+  setEmail,
+  email,
 }) {
-  const [email, setEmail] = useState("");
-  const [showVerification, setShowVerification] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
-
   // Called by RegistrationForm on successful registration
-  const handleRegistrationSuccess = (code) => {
-    setVerificationCode(code);
+  const handleRegistrationSuccess = () => {
     setShowVerification(true);
   };
 
   // If user wants to go back from verification
   const handleBack = () => {
     setShowVerification(false);
-    setVerificationCode("");
   };
 
   return (
@@ -33,6 +31,7 @@ export default function Registration({
       {!showVerification ? (
         <RegistrationForm
           email={email}
+          setShowVerification={setShowVerification}
           setEmail={setEmail}
           onSuccess={handleRegistrationSuccess}
           closeRegistrationModal={closeRegistrationModal}
@@ -42,7 +41,6 @@ export default function Registration({
         <Verification
           defaultEmail={email}
           closeAllModals={closeAllModals}
-          defaultCode={verificationCode}
           onBack={handleBack}
         />
       )}

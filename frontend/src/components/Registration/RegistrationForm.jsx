@@ -27,10 +27,8 @@ const RegistrationForm = ({
 
   const dispatch = useDispatch();
 
-  // 2. Destructure your validation function
   const { validate } = useRegistrationFormValidation();
 
-  // 3. Handle Form Submission
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -60,8 +58,7 @@ const RegistrationForm = ({
         toast.success(
           "Registration successful! Please check your email for the verification code."
         );
-        // Trigger parent success callback
-        onSuccess && onSuccess(resultAction.payload.code);
+        onSuccess();
       } else {
         // If it was rejected or there's an error message:
         toast.error(resultAction.payload || "Registration failed.");

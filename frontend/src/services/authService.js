@@ -70,3 +70,11 @@ export const readNotification = async (userId) => {
   const response = await API.post(`/users/notification/read/${userId}`);
   return response.data; // e.g. { message: 'Password has been reset successfully.' }
 };
+export const loginWithGoogle = async (googleToken) => {
+  const res = await API.post(
+    `/auth/google`,
+    { token: googleToken },
+    { withCredentials: true }
+  );
+  return res.data;
+};

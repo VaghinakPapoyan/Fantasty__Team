@@ -5,6 +5,9 @@ import dotenv from "dotenv";
 import { generateReferralCode } from "../utils/referral.js";
 import emailVerification from "../utils/emailVerification.js";
 import accountLockout from "../utils/accountLockout.js";
+// server/controllers/authController.js
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 dotenv.config();
 
@@ -363,5 +366,29 @@ export const deleteAccount = async (req, res) => {
       message: "An error occurred while Deleting User",
       error: error,
     });
+  }
+};
+
+exports.googleAuth = async (req, res) => {
+  try {
+    const { token } = req.body;
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+
+    // If verification is successful, payload will have user info
+    const { email, name, picture } = payload;
+
+    // Check if this user exists in DB; if not, create it
+    // Then generate your JWT or session for your app
+    const user = await User.findOrCreate({ email, name });
+
+    // Send back your app's token / user info
+    res.status(200).json({ success: true, user });
+  } catch (err) {
+    console.error(err);
+    return res.status(401).json({ error: "Invalid token" });
   }
 };

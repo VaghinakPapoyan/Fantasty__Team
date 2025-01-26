@@ -330,7 +330,15 @@ ul.dropdown-menu-sm {
     justify-content: center;
     align-items: center;
     padding: $spacing-sm $spacing-xs;
+    & > {
+      a {
+        padding: 0;
 
+        button {
+          padding: 0;
+        }
+      }
+    }
     & > a {
       transition: 0.2s;
     }

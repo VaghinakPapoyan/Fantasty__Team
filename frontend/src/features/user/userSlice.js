@@ -55,7 +55,7 @@ export const registerUserThunk = createAsyncThunk(
 );
 
 /**
- * Logs in a user.
+ * Logs in a user with email & password.
  * - The backend call sets an HTTP-only cookie (or session) but does NOT return user data.
  * - After login, we separately fetchAccount() to retrieve user info.
  */
@@ -72,6 +72,31 @@ export const loginUserThunk = createAsyncThunk(
     } catch (error) {
       const errorMessage =
         error?.response?.data?.message || error.message || "Login failed.";
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+/**
+ * Logs in a user via Google. Expects a Google credential token from the frontend.
+ * - The backend endpoint (e.g., POST /api/v1/auth/google) verifies the token using google-auth-library.
+ * - On success, it sets a session/cookie (or returns a JWT), and we fetch the user account.
+ */
+export const loginGoogleUserThunk = createAsyncThunk(
+  "user/loginGoogleUser",
+  async (googleToken, { rejectWithValue }) => {
+    try {
+      // Make a request to your backend to verify the Google token and/or log in the user.
+      await authService.loginWithGoogle(googleToken);
+
+      // Once logged in, fetch the user from your /api/v1/users/account route
+      const user = await authService.getAccount();
+      return user;
+    } catch (error) {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error.message ||
+        "Google login failed.";
       return rejectWithValue(errorMessage);
     }
   }
@@ -204,16 +229,30 @@ const userSlice = createSlice({
         state.registerSuccess = false;
       })
 
-      // ===== loginUserThunk =====
+      // ===== loginUserThunk (email/pass) =====
       .addCase(loginUserThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(loginUserThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload; // user data
       })
       .addCase(loginUserThunk.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // ===== loginGoogleUserThunk (Google) =====
+      .addCase(loginGoogleUserThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginGoogleUserThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload; // user data from Google verification
+      })
+      .addCase(loginGoogleUserThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
@@ -237,10 +276,10 @@ const userSlice = createSlice({
 
       // ===== resendVerificationThunk =====
       .addCase(resendVerificationThunk.pending, (state) => {
-        // Optionally track a resend loading state
+        // optionally track a resend loading state
       })
       .addCase(resendVerificationThunk.fulfilled, (state, action) => {
-        // Optionally handle success message
+        // optionally handle success message
       })
       .addCase(resendVerificationThunk.rejected, (state, action) => {
         state.error = action.payload;

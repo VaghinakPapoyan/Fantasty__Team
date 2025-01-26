@@ -7,11 +7,10 @@ import { toast } from "react-toastify";
 import resetPasswordImage from "../../assets/images/reset-password.svg";
 import { resetPasswordThunk } from "../../features/user/userSlice.js";
 
-export default function ResetPassword({ closeAllModals, openLoginModal }) {
+export default function ResetPassword({ closeAllModals, finish, navigate }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { token } = useParams();
 
   const { loading, error, message } = useSelector((state) => state.user);
@@ -43,8 +42,7 @@ export default function ResetPassword({ closeAllModals, openLoginModal }) {
       .unwrap()
 
       .then(() => {
-        closeAllModals();
-        navigate("/");
+        finish();
       })
       .catch((err) => {
         // The error is already handled with toast from Redux state

@@ -19,6 +19,7 @@ export default function Verification({
   );
   const [resendCooldown, setResendCooldown] = useState(0);
   const dispatch = useDispatch();
+  console.log("dsajkfl;asd");
 
   useEffect(() => {
     if (codeDigits.filter((digit) => digit !== "").length === 4) {

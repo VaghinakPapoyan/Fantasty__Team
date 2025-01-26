@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./assets/styles/index.scss";
 import HomePage from "./pages/homepage/Homepage.jsx";
 import FAQ from "./pages/help-center/FAQ.jsx";
@@ -18,11 +18,16 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
 import MainLoading from "./components/loader/MainLoading.jsx";
+import AllLeagues from "./pages/all-leagues/AllLeagues.jsx";
 
 function App() {
   const [registrationModalOpened, setRegistrationModalOpened] = useState(false);
   const [loginModalOpened, setLoginModalOpened] = useState(false);
-  const [state, setState] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+
   const openRegistrationModal = () => {
     setRegistrationModalOpened(true);
   };
@@ -39,6 +44,10 @@ function App() {
     setLoginModalOpened(false);
     setRegistrationModalOpened(false);
   };
+  const finish = () => {
+    navigate("/");
+    openLoginModal();
+  };
 
   const dispatch = useDispatch();
 
@@ -53,7 +62,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <div>
       <Header openRegistrationModal={openRegistrationModal} />
       <Routes>
         <Route
@@ -74,12 +83,17 @@ function App() {
           path="/reset-password/:token"
           element={
             <ResetPassword
-              openLoginModal={openLoginModal}
               closeAllModals={closeAllModals}
+              finish={finish}
+              navigate={navigate}
             />
           }
         />
 
+        <Route
+          path="/all-leagues"
+          element={<AllLeagues openRegistrationModal={openRegistrationModal} />}
+        />
         <Route path="/help/faq" element={<FAQ />} />
         <Route path="/help/contact-us" element={<ContactUs />} />
         <Route path="/help/rules" element={<Rules />} />
@@ -89,9 +103,13 @@ function App() {
 
       {registrationModalOpened && user ? (
         <Registration
+          showVerification={showVerification}
+          setShowVerification={setShowVerification}
           closeAllModals={closeAllModals}
           openLoginModal={openLoginModal}
           closeRegistrationModal={closeRegistrationModal}
+          email={email}
+          setEmail={setEmail}
         />
       ) : null}
       {loginModalOpened && user ? (
@@ -112,7 +130,7 @@ function App() {
         pauseOnHover
         theme="light"
       />
-    </Router>
+    </div>
   );
 }
 
