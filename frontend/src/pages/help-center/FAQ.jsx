@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Styles.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import arrowImage from "../../assets/images/arrow-right-blue.svg";
 
 export default function FAQ() {
@@ -18,6 +18,8 @@ export default function FAQ() {
       setActiveIndex(index);
     }
   };
+
+  const navigate = useNavigate();
 
   // Example data for FAQ blocks to avoid repeated markup.
   // Each "block" can map over these items.
@@ -168,7 +170,12 @@ export default function FAQ() {
             friendly team.
           </p>
           <div className="dfjcc">
-            <button className="btn">Get in touch</button>
+            <button
+              onClick={() => navigate("/help/contact-us")}
+              className="btn"
+            >
+              Get in touch
+            </button>
           </div>
         </div>
       </div>

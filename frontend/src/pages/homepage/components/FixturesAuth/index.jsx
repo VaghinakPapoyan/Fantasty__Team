@@ -11,7 +11,6 @@ import image4 from "../../../../assets/images/leagues/image4.png";
 import image5 from "../../../../assets/images/leagues/image5.png";
 import image6 from "../../../../assets/images/leagues/image6.png";
 import { getLeague, getLeagues } from "../../../../services/leagueService";
-import { TailSpin } from "react-loader-spinner";
 import Loader from "../../../../components/loader/Loading";
 import moment from "moment";
 const Game = ({ icon, name, icon2, name2, goals }) => {

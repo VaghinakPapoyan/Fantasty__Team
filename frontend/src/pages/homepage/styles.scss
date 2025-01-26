@@ -211,6 +211,49 @@ section.video {
     }
   }
 }
+/* Modal overlay */
+.video-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal content container */
+.video-modal-content {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-modal-content video {
+  width: auto;
+  height: 100%;
+  max-height: 80vh;
+  background: #000;
+  border-radius: $border-radius;
+  outline: none;
+}
+
+/* Close button inside the modal */
+.video-modal-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 @keyframes topBelow {
   from {
     transform: translateY(0);

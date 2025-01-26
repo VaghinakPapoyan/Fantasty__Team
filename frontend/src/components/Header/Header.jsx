@@ -100,19 +100,19 @@ export default function Header({ openRegistrationModal }) {
                 {/* dropdown */}
                 <ul className="dropdown-menu">
                   <li>
-                    <Link to="/faq">FAQ</Link>
+                    <Link to="/help/faq">FAQ</Link>
                   </li>
                   <li>
-                    <Link to="/rules">Rules</Link>
+                    <Link to="/help/rules">Rules</Link>
                   </li>
                   <li>
-                    <Link to="/contact-us">Contact Us</Link>
+                    <Link to="/help/contact-us">Contact Us</Link>
                   </li>
                   <li>
-                    <Link to="/terms-of-use">Terms Of Use</Link>
+                    <Link to="/help/terms-of-use">Terms Of Use</Link>
                   </li>
                   <li>
-                    <Link to="/privacy-policy">Privacy Policy</Link>
+                    <Link to="/help/privacy-policy">Privacy Policy</Link>
                   </li>
                 </ul>
               </li>
@@ -196,19 +196,19 @@ export default function Header({ openRegistrationModal }) {
                 {/* dropdown */}
                 <ul className="dropdown-menu">
                   <li>
-                    <Link to="/faq">FAQ</Link>
+                    <Link to="/help/faq">FAQ</Link>
                   </li>
                   <li>
-                    <Link to="/rules">Rules</Link>
+                    <Link to="/help/rules">Rules</Link>
                   </li>
                   <li>
-                    <Link to="/contact-us">Contact Us</Link>
+                    <Link to="/help/contact-us">Contact Us</Link>
                   </li>
                   <li>
-                    <Link to="/terms-of-use">Terms Of Use</Link>
+                    <Link to="/help/terms-of-use">Terms Of Use</Link>
                   </li>
                   <li>
-                    <Link to="/privacy-policy">Privacy Policy</Link>
+                    <Link to="/help/privacy-policy">Privacy Policy</Link>
                   </li>
                 </ul>
               </li>

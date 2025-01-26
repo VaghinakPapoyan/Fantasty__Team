@@ -7,8 +7,6 @@ import Features from "./components/Features.jsx";
 import Fixtures from "./components/Fixtures.jsx";
 import JoinTheLeague from "./components/JoinTheLeagues.jsx";
 import Cta from "./components/Cta.jsx";
-import Registration from "../../components/Registration/Registration.jsx";
-import Login from "../../components/Login/Login.jsx";
 
 import "./styles.scss";
 import { useSelector } from "react-redux";
@@ -38,47 +36,19 @@ export default function Homepage({
           <FixturesAuth />
           <Rewards />
         </div>
-        {registrationModalOpened ? (
-          <Registration
-            closeAllModals={closeAllModals}
-            openLoginModal={openLoginModal}
-            closeRegistrationModal={closeRegistrationModal}
-          />
-        ) : null}
-        {loginModalOpened ? (
-          <Login
-            closeLoginModal={closeLoginModal}
-            openRegistrationModal={openRegistrationModal}
-            closeAllModals={closeAllModals}
-          />
-        ) : null}
       </main>
     );
   }
   return (
     <main>
-      <Hero />
+      <Hero openRegistrationModal={openRegistrationModal} />
       <Video />
       <Steps />
       <Rewards />
       <Features withLines={true} />
       <Fixtures />
-      <JoinTheLeague />
-      <Cta />
-      {registrationModalOpened ? (
-        <Registration
-          closeAllModals={closeAllModals}
-          openLoginModal={openLoginModal}
-          closeRegistrationModal={closeRegistrationModal}
-        />
-      ) : null}
-      {loginModalOpened ? (
-        <Login
-          closeLoginModal={closeLoginModal}
-          openRegistrationModal={openRegistrationModal}
-          closeAllModals={closeAllModals}
-        />
-      ) : null}
+      <JoinTheLeague openRegistrationModal={openRegistrationModal} />
+      <Cta openRegistrationModal={openRegistrationModal} />
     </main>
   );
 }

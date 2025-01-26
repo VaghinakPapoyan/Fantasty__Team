@@ -261,3 +261,155 @@
     }
   }
 }
+
+.privacy-policy.block {
+  h2 {
+    font-family: Plus Jakarta Sans;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31.2px;
+    color: $tertiary-color;
+    letter-spacing: 0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    margin-bottom: $spacing-lg;
+    color: #00026f;
+    margin-top: 50px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    font-family: Segoe UI;
+    margin-bottom: $spacing-md;
+    color: $tertiary-color;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    text-decoration-style: solid;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+    a {
+      color: #010abc;
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    margin-bottom: $spacing-md;
+    list-style: disc;
+    padding-left: $spacing-3xl;
+    li {
+      font-family: Segoe UI;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 30px;
+      letter-spacing: 0.01em;
+      color: $tertiary-color;
+      text-align: left;
+      text-decoration-style: solid;
+      text-underline-position: from-font;
+      text-decoration-skip-ink: none;
+
+      a {
+        color: #010abc;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.contact-us.block {
+  h2 {
+    font-family: Plus Jakarta Sans;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31.2px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: $tertiary-color;
+    margin-bottom: $spacing-lg;
+  }
+
+  p {
+    font-family: Segoe UI;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #5a6576;
+    margin-bottom: 40px;
+  }
+
+  .input {
+    margin-bottom: $spacing-lg;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    .input-container {
+      width: 50%;
+      margin-right: $spacing-lg;
+      &:last-child {
+        margin-right: 0;
+      }
+      .styled-input {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: Plus Jakarta Sans;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20.16px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        background-color: white;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: $tertiary-color;
+      }
+
+      .input-label {
+        font-family: Plus Jakarta Sans;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20.16px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        color: $tertiary-color;
+      }
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 220px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #d1d1d1;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  textarea::placeholder {
+    color: $tertiary-color;
+  }
+
+  .btn {
+    margin-top: $spacing-3xl;
+    background-color: #010abc;
+    color: $secondary-color;
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
