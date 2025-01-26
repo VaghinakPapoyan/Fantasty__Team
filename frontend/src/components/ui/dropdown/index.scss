@@ -20,33 +20,76 @@
     cursor: pointer;
 
     img {
-      transition: 0.3s;
+      transition: 0.2s;
     }
   }
+  &:hover .dn__content {
+    visibility: visible;
+    opacity: 1;
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  &:hover .dn__title img:nth-last-child(1) {
+    rotate: 180deg;
+  }
   &__content {
-    display: none;
+    visibility: hidden;
     position: absolute;
-    top: 150%;
-    padding: 12px 8px;
     background-color: $secondary-color;
     border-radius: 12px;
 
-    flex-direction: column;
-    gap: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
 
+    flex-direction: column;
+    width: max-content;
+
+    box-shadow: $shadow-large;
+    border-radius: $border-radius;
+    background: $primary-color;
+    animation: fadeOut 0/3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
     &__item {
       display: flex;
+      min-height: max-content;
       align-items: center;
       gap: 8px;
       font-weight: 600;
-      padding: 8px;
       cursor: pointer;
       font-size: $font-size-lg;
       white-space: nowrap;
-      color: $tertiary-color;
+      color: $secondary-color;
+      padding: $spacing-sm $spacing-lg;
+      cursor: pointer !important;
+      transition: 0.2s;
+      border-bottom: 1px solid #ffffff33;
+      &:last-child {
+        margin-bottom: 0;
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+      &:hover {
+        background-color: #09105f;
+      }
     }
   }
-  &__content__open {
-    display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

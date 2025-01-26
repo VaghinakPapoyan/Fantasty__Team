@@ -49,7 +49,6 @@ const LeagueItem = ({
 
 export default function Leagues() {
   const user = useSelector((state) => state.user.user);
-  console.log(user);
   const name = user?.fullName;
   const testData = [
     {
