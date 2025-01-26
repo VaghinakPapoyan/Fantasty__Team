@@ -33,6 +33,7 @@
           font-weight: 500;
 
           & > a {
+            padding: $spacing-md 0;
             transition: 0.2s;
           }
           & > button {
@@ -246,7 +247,6 @@ ul.dropdown-menu {
   background: $primary-color;
 
   li {
-    padding: $spacing-sm $spacing-lg;
     cursor: pointer !important;
     transition: 0.2s;
     border-bottom: 1px solid #ffffff33;
@@ -254,6 +254,8 @@ ul.dropdown-menu {
     & > button,
     & > a > button {
       transition: 0.2s;
+      padding: $spacing-sm $spacing-lg;
+      display: block;
       color: $secondary-color !important;
     }
     a,

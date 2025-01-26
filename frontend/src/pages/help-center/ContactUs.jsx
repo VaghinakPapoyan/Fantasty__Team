@@ -1,12 +1,36 @@
 import React, { useState } from "react";
 import "./Styles.scss";
 import { Link } from "react-router-dom";
-import arrowImage from "../../assets/images/arrow-right-blue.svg";
+import { sendMessage } from "../../services/messageService";
+
+// If using react-toastify:
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactUs() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await sendMessage({ name, email, message });
+
+      // Show success toast
+      toast.success("Message sent successfully!");
+
+      // Clear the form
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (err) {
+      // Show error toast
+      toast.error("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
     <section className="help">
       <div className="help-container">
@@ -40,30 +64,45 @@ export default function ContactUs() {
             friendly team.
           </h2>
           <p>We will contact you within 24 hours</p>
-          <div className="input">
-            <div className="input-container">
-              <input
-                type="text"
-                className="styled-input"
-                placeholder=" "
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label className="input-label">Name</label>
+
+          {/* Form for user inputs */}
+          <form onSubmit={handleSubmit}>
+            <div className="input">
+              <div className="input-container">
+                <input
+                  type="text"
+                  className="styled-input"
+                  placeholder=" "
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <label className="input-label">Name</label>
+              </div>
+              <div className="input-container">
+                <input
+                  type="email"
+                  className="styled-input"
+                  placeholder=" "
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <label className="input-label">Email</label>
+              </div>
             </div>
-            <div className="input-container">
-              <input
-                type="email"
-                className="styled-input"
-                placeholder=" "
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label className="input-label">Email</label>
-            </div>
-          </div>
-          <textarea placeholder="Message"></textarea>
-          <button className="btn">Send</button>
+
+            <textarea
+              placeholder="Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+
+            <button type="submit" className="btn">
+              Send
+            </button>
+          </form>
         </div>
       </div>
     </section>
