@@ -78,8 +78,8 @@ function App() {
         <Route path="/help/faq" element={<FAQ />} />
         <Route path="/help/contact-us" element={<ContactUs />} />
         <Route path="/help/rules" element={<Rules />} />
-        <Route path="/help/contact-us" element={<PrivacyPolicy />} />
-        <Route path="/help/contact-us" element={<TermsOfUse />} />
+        <Route path="/help/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/help/terms-of-use" element={<TermsOfUse />} />
       </Routes>
       <Footer />
 
