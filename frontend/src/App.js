@@ -10,15 +10,19 @@ import TermsOfUse from "./pages/help-center/TermsOfUse.jsx";
 import ResetPassword from "./components/Reset-Password/ResetPassword.jsx";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
+import Registration from "./components/Registration/Registration.jsx";
+import Login from "./components/Login/Login.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAccountThunk } from "./features/user/userSlice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.scss";
+import MainLoading from "./components/loader/MainLoading.jsx";
 
 function App() {
   const [registrationModalOpened, setRegistrationModalOpened] = useState(false);
   const [loginModalOpened, setLoginModalOpened] = useState(false);
+  const [state, setState] = useState(false);
   const openRegistrationModal = () => {
     setRegistrationModalOpened(true);
   };
@@ -35,18 +39,19 @@ function App() {
     setLoginModalOpened(false);
     setRegistrationModalOpened(false);
   };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     // Attempt to fetch the user from the server on first load/refresh.
     dispatch(fetchAccountThunk());
   }, [dispatch]);
-  const loading = useSelector((e) => {
-    return e.user.loading;
-  });
+  const loading = useSelector((state) => state.user.loading);
+  const user = useSelector((state) => state.user);
   if (loading) {
-    return "...loading";
+    return <MainLoading />;
   }
+
   return (
     <Router>
       <Header openRegistrationModal={openRegistrationModal} />
@@ -81,6 +86,21 @@ function App() {
         <Route path="/help/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/help/terms-of-use" element={<TermsOfUse />} />
       </Routes>
+
+      {registrationModalOpened && user ? (
+        <Registration
+          closeAllModals={closeAllModals}
+          openLoginModal={openLoginModal}
+          closeRegistrationModal={closeRegistrationModal}
+        />
+      ) : null}
+      {loginModalOpened && user ? (
+        <Login
+          closeLoginModal={closeLoginModal}
+          openRegistrationModal={openRegistrationModal}
+          closeAllModals={closeAllModals}
+        />
+      ) : null}
       <Footer />
 
       <ToastContainer
