@@ -66,8 +66,33 @@
 
     .right {
       position: relative;
-
+      .notifications__popup {
+        top: 100%;
+        left: -50%;
+        min-width: 200px;
+        border-radius: 12px;
+        position: absolute;
+        background-color: #09105f;
+        &:hover {
+          opacity: 1;
+          visibility: visible;
+        }
+        .notification {
+          padding: 12px 16px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          &__circle {
+            width: 10px;
+            height: 10px;
+            background-color: $primary-color-no-gradient;
+            border-radius: 50%;
+          }
+        }
+      }
       .left {
+        display: flex;
         img {
           transition: 0.2s;
           cursor: pointer;

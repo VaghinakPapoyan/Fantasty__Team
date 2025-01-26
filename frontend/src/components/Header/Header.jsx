@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ArrowImage from "../../assets/images/arrow.png";
 import logoImage from "../../assets/images/logo-image.png";
@@ -10,10 +10,15 @@ import { logoutUserThunk } from "../../features/user/userSlice";
 
 import "./styles.scss";
 import { useSelector } from "react-redux";
+import { readNotification } from "../../services/authService";
+import moment from "moment";
 
 export default function Header({ openRegistrationModal }) {
   const { user } = useSelector((state) => state.user);
-
+  const [notifications, setNotifications] = useState(
+    user ? user.notifications : []
+  );
+  const [isOpenNotifications, setIsOpenNotifications] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   const dispatch = useDispatch();
@@ -23,6 +28,45 @@ export default function Header({ openRegistrationModal }) {
   };
   const toggleShowDropdown = () => {
     setShowUserDropdown((state) => !state);
+  };
+
+  const filterNotifications = (items) => {
+    if (!items) return [];
+    return [...items].sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+  };
+
+  const openNotifications = async () => {
+    if (isOpenNotifications) {
+      setIsOpenNotifications(false);
+      return;
+    }
+    setIsOpenNotifications(true);
+    await readNotification(user._id);
+    setNotifications(
+      filterNotifications(
+        notifications.map((e) => {
+          return {
+            ...e,
+            active: false,
+          };
+        })
+      )
+    );
+  };
+
+  useEffect(() => {
+    setNotifications(
+      filterNotifications(user ? user.notifications : notifications)
+    );
+  }, [user?.notifications]);
+
+  const getActiveCount = () => {
+    return notifications.reduce((prev, next, i) => {
+      if (notifications[i].active) return prev + 1;
+      return prev;
+    }, 0);
   };
 
   if (user) {
@@ -75,9 +119,22 @@ export default function Header({ openRegistrationModal }) {
             </ul>
           </div>
           <div className="right">
-            <div className="left">
+            <div className="left" onClick={() => openNotifications()}>
               <img src={bellImage} alt="bell" />
+              {getActiveCount()}
             </div>
+            {isOpenNotifications && (
+              <div className="notifications__popup">
+                {notifications.map((e) => {
+                  return (
+                    <div className="notification">
+                      {e.text}- {moment(e.created_at).format("D MMM HH:mm")}
+                      {e.active && <div className="notification__circle"></div>}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             <div className="right" onClick={toggleShowDropdown}>
               <img src={userImage} alt="user" />
               <img

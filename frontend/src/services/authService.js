@@ -65,3 +65,8 @@ export const resetPassword = async (token, password) => {
   const response = await API.post("/users/reset-password", { token, password });
   return response.data; // e.g. { message: 'Password has been reset successfully.' }
 };
+
+export const readNotification = async (userId) => {
+  const response = await API.post(`/users/notification/read/${userId}`);
+  return response.data; // e.g. { message: 'Password has been reset successfully.' }
+};

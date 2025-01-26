@@ -52,6 +52,20 @@ export function FixturesAuth() {
         const { _id } = data[0];
         getLeague(_id).then(({ data: leag }) => {
           setLeague(leag);
+          const now = new Date();
+          const lastBeforeNow = leag.gameWeeks
+            .filter((obj) => new Date(obj.startDate) < now) // Only include objects with `startDate` before now
+            .reduce((latest, obj) => {
+              return !latest ||
+                new Date(obj.startDate) > new Date(latest.startDate)
+                ? obj
+                : latest;
+            }, null);
+          const indexOf = leag.gameWeeks.indexOf(lastBeforeNow);
+          setSelectedGameWeek({
+            value: indexOf,
+            label: `Matchday ${indexOf + 1}`,
+          });
           setIsLoading(false);
         });
       }
@@ -62,9 +76,18 @@ export function FixturesAuth() {
     setIsLoading(true);
     getLeague(value).then(({ data: leag }) => {
       setLeague(leag);
+      const now = new Date();
+      const lastBeforeNow = leag.gameWeeks
+        .filter((obj) => new Date(obj.startDate) < now) // Only include objects with `startDate` before now
+        .reduce((latest, obj) => {
+          return !latest || new Date(obj.startDate) > new Date(latest.startDate)
+            ? obj
+            : latest;
+        }, null);
+      const indexOf = leag.gameWeeks.indexOf(lastBeforeNow);
       setSelectedGameWeek({
-        value: 0,
-        label: "Matchday 1",
+        value: indexOf,
+        label: `Matchday ${indexOf + 1}`,
       });
       setIsLoading(false);
     });
@@ -119,11 +142,9 @@ export function FixturesAuth() {
 
   return (
     <div className="fix">
-      {isLoading && (
+      {!isLoading && (
         <div className="fix__loading">
-          <div className="loader">
-            <Loader />
-          </div>
+          <Loader />
         </div>
       )}
       <div className="container">
@@ -150,10 +171,9 @@ export function FixturesAuth() {
         </div>
         <div className="fix__blocks">
           {Object.keys(groupedByDay).map((e) => {
-            console.log(e);
             const item = groupedByDay[e];
             return (
-              <div className="fix__block">
+              <div className="fix__block" key={e._id}>
                 <div className="fix__block__top">
                   <div className="title">
                     {moment(e).format(DATE_FORMAT_TYPE)}
@@ -164,6 +184,7 @@ export function FixturesAuth() {
                   {item.map((e) => {
                     return (
                       <Game
+                        key={e._id}
                         icon={e.awayTeam.crest}
                         name={e.awayTeam.name}
                         icon2={e.homeTeam.crest}

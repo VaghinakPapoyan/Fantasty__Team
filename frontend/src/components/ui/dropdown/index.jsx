@@ -30,6 +30,7 @@ export const DropDown = ({
               onClick={() => {
                 select(e);
               }}
+              key={e.value}
             >
               {isHaveIcon && <img width={40} height={50} src={e.icon} />}
               {title}

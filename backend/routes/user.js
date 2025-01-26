@@ -36,6 +36,10 @@ import {
   updateUserById, // Updates a specific user's information (admin only)
   sendUserMail, // Sends an email to a specific user (admin only)
   createUser,
+  sendUserNotification,
+  readNotification,
+  sendNotificationsToUsers,
+  getAllUsersNames,
 } from "../controllers/admin-user.js";
 
 // Load environment variables from .env file
@@ -112,6 +116,11 @@ userRouter.post(
   authenticate, // Middleware to authenticate the user
   leaveLeague // Controller to handle change of notification preferences
 );
+userRouter.post(
+  "/notification/read/:userId",
+  authenticate, // Middleware to authenticate the user
+  readNotification // Controller to handle change of notification preferences
+);
 
 // User Admin Routes
 userRouter.post(
@@ -124,6 +133,12 @@ userRouter.get(
   authenticate, // Middleware to authenticate the user
   authorize(["super-admin"]), // Middleware to authorize access for 'super-admin' users
   getAllUsers // Controller to get all users in the system
+);
+userRouter.get(
+  "/admin/all-names",
+  authenticate, // Middleware to authenticate the user
+  authorize(["super-admin"]), // Middleware to authorize access for 'super-admin' users
+  getAllUsersNames // Controller to get all users in the system
 );
 userRouter.delete(
   "/admin/delete/:userId",
@@ -154,6 +169,18 @@ userRouter.post(
   authenticate, // Middleware to authenticate the user
   authorize(["super-admin"]), // Middleware to authorize access for 'super-admin' users
   sendUserMail // Controller to send an email to a specific user
+);
+userRouter.post(
+  "/admin/send-notification/:userId",
+  authenticate, // Middleware to authenticate the user
+  authorize(["super-admin"]), // Middleware to authorize access for 'super-admin' users
+  sendUserNotification // Controller to send an email to a specific user
+);
+userRouter.post(
+  "/admin/send-notifications",
+  authenticate, // Middleware to authenticate the user
+  authorize(["super-admin"]), // Middleware to authorize access for 'super-admin' users
+  sendNotificationsToUsers // Controller to send an email to a specific user
 );
 
 // Export the router for use in other files

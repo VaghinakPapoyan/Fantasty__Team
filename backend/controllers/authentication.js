@@ -283,7 +283,9 @@ export async function resendVerifyCode(req, res) {
 export const getAccountInfo = async (req, res) => {
   try {
     // Find the user by ID extracted from the authentication middleware
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id, {
+      notifications: { $slice: -5 }, // Get the last 5 notifications
+    });
 
     // If user is not found, respond with 404 Not Found
     if (!user) {
@@ -308,6 +310,7 @@ export const getAccountInfo = async (req, res) => {
       status: user.status,
       lastLogin: user.lastLogin,
       isVerified: user.isVerified,
+      notifications: user.notifications,
       preferredLanguage: user.settings.preferredLanguage,
       wantsNotifications: user.settings.wantsNotifications,
       createdAt: user.createdAt,
