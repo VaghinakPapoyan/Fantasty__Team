@@ -141,7 +141,7 @@ export function FixturesAuth() {
 
   return (
     <div className="fix">
-      {!isLoading && (
+      {isLoading && (
         <div className="fix__loading">
           <Loader />
         </div>
