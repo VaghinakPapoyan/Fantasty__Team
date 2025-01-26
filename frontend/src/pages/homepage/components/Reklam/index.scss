@@ -1,6 +1,8 @@
 @import "../../../../assets/styles/variables.scss";
 
 .reklam {
+  padding-top: 70px;
+  position: relative;
   .container {
     display: flex;
     align-items: center;
@@ -8,16 +10,25 @@
     .content {
       display: flex;
       flex-direction: column;
-      gap: 16px;
       &__title {
         font-weight: 600;
         font-size: 32px;
         text-transform: uppercase;
         color: white;
+        font-family: Plus Jakarta Sans;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 38.4px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
       }
       &__line {
         width: 100%;
         height: 1px;
+        margin-top: $spacing-lg;
+        margin-bottom: $spacing-lg;
         background: linear-gradient(
           90deg,
           rgba(255, 255, 255, 0.1) 0%,
@@ -27,14 +38,74 @@
       }
       &__text {
         font-weight: 600;
+        font-family: Plus Jakarta Sans;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
         font-size: $font-size-lg;
         color: $secondary-color;
       }
       &__text2 {
+        margin-top: $spacing-lg;
+        font-family: Segoe UI;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
         font-weight: 400;
         font-size: $font-size-base;
         color: $secondary-color;
       }
     }
+  }
+
+  .placeholder {
+    background: transparent;
+    width: 100%;
+    height: 800px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    z-index: -10;
+  }
+
+  .line1,
+  .line2,
+  .line3,
+  .line4 {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    transition: 1.5s;
+    max-height: 0;
+    overflow: hidden;
+  }
+  .line1 {
+    left: 160px;
+  }
+  .line2 {
+    left: 265px;
+  }
+  .line4 {
+    right: 10px;
+  }
+  .line3 {
+    left: 1100px;
+  }
+
+  .line1.line-visible,
+  .line2.line-visible,
+  .line3.line-visible,
+  .line4.line-visible {
+    max-height: 800px;
   }
 }

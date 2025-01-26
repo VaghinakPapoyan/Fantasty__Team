@@ -141,13 +141,13 @@ export default function Leagues() {
           <table className="leagues__table">
             <thead>
               <tr>
-                <th style={{ width: "27%" }}>League name</th>
-                <th style={{ width: "9%" }}>Scoring</th>
-                <th style={{ width: "10%" }}>Participants</th>
-                <th style={{ width: "10%" }}>Draft</th>
+                <th style={{ width: "37%" }}>League name</th>
+                <th style={{ width: "7%" }}>Scoring</th>
+                <th style={{ width: "8%" }}>Participants</th>
+                <th style={{ width: "8%" }}>Draft</th>
                 <th style={{ width: "13%" }}>Starts day</th>
-                <th style={{ width: "14%" }}>Price</th>
-                <th style={{ width: "15%" }}>Action</th>
+                <th style={{ width: "13%" }}>Price</th>
+                <th style={{ width: "12%" }}>Action</th>
               </tr>
             </thead>
             <tbody>

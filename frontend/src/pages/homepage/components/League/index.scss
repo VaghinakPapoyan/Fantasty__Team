@@ -3,6 +3,7 @@
 .leagues {
   // background-color: $tertiary-color-20;
   padding: 70px 0px;
+  padding-bottom: 0;
   .container {
     display: flex;
     flex-direction: column;
@@ -25,10 +26,11 @@
         text-align: left;
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
-
+        padding-bottom: 6px;
         max-width: max-content;
-        border-bottom: 1px solid $secondary-color;
+        border-bottom: 2px solid $secondary-color;
         span {
+          text-transform: uppercase;
           font-weight: 700;
         }
       }
@@ -51,8 +53,15 @@
       gap: 8px;
       .text {
         font-weight: 400;
-        font-size: $font-size-md;
         color: $secondary-color;
+        font-family: Segoe UI;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
       }
     }
   }
@@ -68,13 +77,28 @@
       gap: 4px;
       padding: 20px 24px;
       .title {
+        font-family: Plus Jakarta Sans;
+        font-size: 20px;
         font-weight: 600;
-        font-size: $font-size-lg;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
+        font-weight: 600;
         color: $tertiary-color;
       }
       .subtitle {
+        //styleName: Paragraph/tiny/16px;
+        font-family: Segoe UI;
+        font-size: 16px;
         font-weight: 400;
-        font-size: $font-size-base;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
         color: #5a6576;
       }
     }
@@ -83,17 +107,39 @@
     thead {
       background-color: $tertiary-color-20;
       th {
-        padding: 12px 24px;
+        padding: 12px 12px;
         color: #5a6576;
         font-weight: 500;
         font-size: $font-size-base;
+        &:first-child {
+          padding-left: 24px;
+        }
+        &:last-child {
+          padding-right: 24px;
+        }
+      }
+    }
+    tr:first-child {
+      td {
+        padding-top: 16px;
+      }
+    }
+    tr:last-child {
+      td {
+        padding-bottom: 26px;
       }
     }
     td {
-      padding: 16px 20px 8px 20px;
+      padding: 8px 12px 8px 12px;
       color: #5a6576;
       font-weight: 400;
       font-size: $font-size-sm;
+      &:first-child {
+        padding-left: 24px;
+      }
+      &:last-child {
+        padding-right: 24px;
+      }
       img {
         border-radius: 12px;
         width: 70px;
@@ -118,7 +164,6 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        gap: 8px;
         &__new {
           color: $primary-color-no-gradient;
           font-weight: 600;
@@ -152,10 +197,20 @@
       &__try {
         border: 1px solid $primary-color-no-gradient;
         color: $primary-color-no-gradient;
+        transition: 0.2s;
+        &:hover {
+          background: $primary-color-no-gradient;
+          color: $secondary-color;
+        }
       }
       &__buy {
-        background-color: $primary-color-no-gradient;
-        color: $secondary-color;
+        color: #09105f;
+        background-color: #78dfb2;
+        transition: 0.2s;
+        &:hover {
+          color: #78dfb2;
+          background-color: #09105f;
+        }
       }
     }
   }

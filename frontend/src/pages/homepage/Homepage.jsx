@@ -32,10 +32,8 @@ export default function Homepage({
     return (
       <main className="home__logined">
         <Leagues />
-        <DesignComponent>
-          <HomeSection />
-          <Features />
-        </DesignComponent>
+        <HomeSection />
+        <Features mt70={true} />
         <div className="home__block">
           <FixturesAuth />
           <Rewards />
@@ -63,7 +61,7 @@ export default function Homepage({
       <Video />
       <Steps />
       <Rewards />
-      <Features />
+      <Features withLines={true} />
       <Fixtures />
       <JoinTheLeague />
       <Cta />

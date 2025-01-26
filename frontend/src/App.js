@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./assets/styles/index.scss";
 import HomePage from "./pages/homepage/Homepage.jsx";
+import FAQ from "./pages/help-center/FAQ.jsx";
+import ContactUs from "./pages/help-center/ContactUs.jsx";
+import PrivacyPolicy from "./pages/help-center/PrivacyPolicy.jsx";
+import Rules from "./pages/help-center/Rules.jsx";
+import TermsOfUse from "./pages/help-center/TermsOfUse.jsx";
 import ResetPassword from "./components/Reset-Password/ResetPassword.jsx";
 import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -69,6 +74,12 @@ function App() {
             />
           }
         />
+
+        <Route path="/help/faq" element={<FAQ />} />
+        <Route path="/help/contact-us" element={<ContactUs />} />
+        <Route path="/help/rules" element={<Rules />} />
+        <Route path="/help/contact-us" element={<PrivacyPolicy />} />
+        <Route path="/help/contact-us" element={<TermsOfUse />} />
       </Routes>
       <Footer />
 
